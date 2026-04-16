@@ -53,7 +53,7 @@ bind = SUPER, M, exec, ~/.config/hypr/_scripts/minimize/minimize.sh
 ### Step 3: Configure Obsidian Vault (Pomodoro)
 The Pomodoro script logs completed focus sessions to an Obsidian Markdown file. Edit `./scripts/pomodoro/pomodoro_control.sh` before or after installation to match your Vault path:
 ```bash
-VAULT_DIR="$HOME/Obsidian Vaults/Marcos Augusto"
+VAULT_DIR="$HOME/obsidian/vaults/path"
 ```
 
 ## Usage
