@@ -37,7 +37,7 @@ The easiest way to install is using the provided script which handles file place
 
 ```bash
 git clone https://github.com/marcosaugustoldo/omarchy-teal-waybar.git
-cd /tmp/omarchy-teal-waybar
+cd /omarchy-teal-waybar
 chmod +x install.sh
 ./install.sh
 ```
