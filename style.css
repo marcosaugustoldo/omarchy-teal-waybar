@@ -1,0 +1,213 @@
+@import "../omarchy/current/theme/waybar.css";
+
+* {
+  background-color: transparent;
+  color: @foreground;
+  border: none;
+  border-radius: 0;
+  min-height: 0; /* Mantido para garantir que a barra não estique desnecessariamente */
+  font-family: 'JetBrainsMono Nerd Font';
+  font-size: 12px;
+}
+
+window#waybar {
+  /* Fundo da barra principal com transparência sutil */
+  background-color: alpha(@background, 0);
+}
+
+/* -----------------------------------------------------
+ * Tooltips & Menus
+ * ----------------------------------------------------- */
+tooltip {
+  background-color: alpha(@background, 0.95);
+  border: 1px solid @border;
+  border-radius: 12px; /* Reduzido de 16px para parear perfeitamente com os menus */
+  padding: 8px;
+}
+
+tooltip label {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 12px; /* Padronizado para px (era 10pt) */
+  padding: 10px 5px 10px 5px;
+  color: @foreground;
+}
+
+menu {
+  /* Menus de contexto (Tray/Clock) */
+  background-color: alpha(@background, 0.95);
+  border: 2px solid @border;
+  border-radius: 12px;
+  font-size: 12px;
+  padding: 10px 5px 10px 5px;
+}
+
+menu menuitem {
+  background-color: transparent;
+  padding: 10px 5px 10px 5px;
+  border-radius: 12px;
+  font-size: 12px;
+  transition: all 0.2s ease-in-out;
+}
+
+menu menuitem:hover {
+  /* Cor de sobretom monocromático nos menus */
+  background-color: @accent;
+  color: @foreground;
+  font-size: 12px;
+  padding: 10px 5px 10px 5px;
+}
+
+/* -----------------------------------------------------
+ * Módulos: Layout e Fundos
+ * ----------------------------------------------------- */
+.modules-left {
+  margin-left: 4px;
+}
+
+.modules-center,
+.modules-right {
+  border-radius: 12px;
+  padding: 2px 4px;
+  margin: 4px 4px; /* Corrigido de 3.5 sem px para 4px */
+  background: alpha(@background, 0.65);
+}
+
+.modules-center {
+  margin-right: 8px;
+}
+
+.modules-right {
+  margin-right: 8px;
+}
+
+/* -----------------------------------------------------
+ * Workspaces
+ * ----------------------------------------------------- */
+#workspaces {
+  transition: all 150ms ease-in-out;
+  background: alpha(@background, 1);
+  border-radius: 12px;
+  padding: 1px;
+  margin: 2px 2px; /* Corrigido sintaxe inválida de margem */
+}
+
+#workspaces button {
+  transition: all 90ms ease-in;
+  padding: 1px 0;
+  background: alpha(@background, 1);
+  color: white;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  margin: 1px; /* Corrigido de 1 1px */
+}
+
+/* Agrupando estados ativos idênticos */
+#workspaces button.active,
+#workspaces button.empty.active {
+  border: 1px solid alpha(@highlight, 0.1);
+  background: alpha(@highlight, 0.4);
+  color: #121212;
+  transition: all 90ms ease-in-out;
+  min-width: 35px;
+  padding: 0;
+}
+
+/* -----------------------------------------------------
+ * Módulos Individuais (Agrupados por espaçamento)
+ * ----------------------------------------------------- */
+#cpu,
+#bluetooth,
+#network,
+#pulseaudio,
+#battery,
+#custom-omarchy {
+  min-width: 12px;
+  margin: 0 4px;
+  font-size: 12px;
+}
+
+#clock,
+#custom-minimized,
+#custom-pomodoro,
+#custom-pacman,
+#custom-omarchy,
+#custom-flatpak,
+#custom-update {
+  margin: 0 7.5px 0 7.5px;
+  font-size: 12px;
+}
+
+#tray {
+  margin-right: 4px;
+  margin-left: 4px;
+  font-size: 12px;
+}
+
+#custom-expand-icon {
+  margin: 0 8px 0 8px;
+}
+
+#custom-update {
+  min-width: 12px;
+  margin: 0 8px;
+  font-size: 10px;
+}
+
+/* -----------------------------------------------------
+ * Indicadores e Módulos Customizados Menores
+ * ----------------------------------------------------- */
+.hidden {
+  opacity: 0;
+}
+
+#custom-screenrecording-indicator,
+#custom-idle-indicator,
+#custom-notification-silencing-indicator {
+  min-width: 12px;
+  margin: 0 0 0 5px;
+  font-size: 10px;
+  padding-bottom: 1px;
+}
+
+/* Agrupando todas as cores de alerta (#a55555) */
+#custom-screenrecording-indicator.active,
+#custom-idle-indicator.active,
+#custom-notification-silencing-indicator.active,
+#custom-voxtype.recording {
+  color: @highlight;
+}
+
+#custom-voxtype {
+  min-width: 12px;
+  margin: 0 0 0 7px; /* Convertido de 7.5px para inteiro */
+}
+
+/* -----------------------------------------------------
+ * Estados Lofi & Pomodoro
+ * ----------------------------------------------------- */
+
+#custom-pomodoro.focus {
+  color: @highlight; /* Variável do teal */
+}
+
+#custom-pomodoro.break,
+#custom-pomodoro.paused {
+  color: #c55c45; /* Vermelho */
+}
+
+#custom-pomodoro.stopped {
+  color: @foreground;
+}
+
+/* -----------------------------------------------------
+ * MPRIS
+ * ----------------------------------------------------- */
+#mpris.paused {
+  margin: 0 8px;
+  color: @foreground;
+}
+
+#mpris.playing {
+  margin: 0 8px;
+  color: alpha(@highlight, 0.75);
+}

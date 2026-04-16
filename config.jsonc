@@ -1,0 +1,209 @@
+{
+  "reload_style_on_change": true,
+  "layer": "top",
+  "position": "top",
+  "spacing": 0,
+  "height": 26,
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["custom/pomodoro", "clock", "custom/minimized", "custom/pacman", "custom/flatpak", "custom/update", "custom/voxtype", "custom/screenrecording-indicator", "custom/idle-indicator", "custom/notification-silencing-indicator"],
+  "modules-right": ["mpris", "group/tray-expander", "custom/omarchy", "bluetooth", "network", "pulseaudio", "battery"],
+  "custom/pacman": {
+    "format": "{}",
+    "interval": 86400,
+    "return-type": "json",
+    "exec": "~/.config/waybar/_scripts/updates/updates_arch.sh",
+    "on-click": "omarchy-launch-floating-terminal-with-presentation 'yay -Syu'",
+    "tooltip": true
+  },
+  "custom/flatpak": {
+    "format": "{}",
+    "interval": 86400,
+    "return-type": "json",
+    "exec": "~/.config/waybar/_scripts/updates/updates_flatpak.sh",
+    "on-click": "omarchy-launch-floating-terminal-with-presentation 'flatpak update'",
+    "tooltip": true
+  },
+  "custom/pomodoro": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/.config/hypr/_scripts/pomodoro/pomodoro_status.sh",
+    "on-click": "~/.config/hypr/_scripts/pomodoro/pomodoro_control.sh toggle",
+    "on-click-right": "~/.config/hypr/_scripts/pomodoro/pomodoro_control.sh reset",
+    "signal": 13,
+    "interval": "once"
+  },
+  "custom/minimized": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/.config/hypr/_scripts/minimize/minimized_count.sh",
+    "on-click": "~/.config/hypr/_scripts/minimize/window_switcher.sh",
+    "signal": 11,
+    "interval": "once",
+    "escape": true
+  },
+  "mpris": {
+  "interval": 10,
+  "format": "{player_icon} {dynamic}",
+  "format-paused": "{status_icon} {artist} {title}",
+  "on-click-middle": "playerctl next",
+  "on-click": "playerctl play-pause",
+  "on-click-right": "playerctl previous",
+  "scroll-step": 5.0,
+  "smooth-scrolling-threshold": 1,
+  "tooltip": true,
+  "tooltip-format": "{status_icon} {dynamic}\nEsquerdo: Play/Pause\nMeio: Anteiror\nRight Click: Próxima",
+  "player-icons": {
+    "brave-browser": "",
+    "default": "",
+    "mpv": "󰐹",
+    "spotify": "󰎆",
+    "vlc": "󰕼",
+    "tidal-hifi": "󰎅",
+  },
+  "status-icons": {
+    "paused": "",
+    "playing": "",
+    "stopped": "",
+  },
+  "dynamic-order": ["artist", "title"],
+  "ignored-players": ["firefox", "zen"],
+  "max-length": 40,
+ },
+  "custom/separator#blank": {
+    "format": " ",
+    "interval": "once",
+    "tooltip": false
+},
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "all-outputs": false,
+    "format-icons": {
+      "1": "",
+      "2": "󰧑",
+      "3": "",
+      "4": ""
+    },
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": []
+    }
+  },
+  "custom/omarchy": {
+    "format": "",
+    "on-click": "omarchy-menu",
+    "on-click-right": "xdg-terminal-exec",
+    "tooltip-format": "Omarchy Menu\n\nSuper + Alt + Space"
+  },
+  "custom/update": {
+    "format": "",
+    "exec": "omarchy-update-available",
+    "on-click": "omarchy-launch-floating-terminal-with-presentation omarchy-update",
+    "tooltip-format": "Omarchy update available",
+    "signal": 7,
+    "interval": 86400
+  },
+  "cpu": {
+    "interval": 5,
+    "format": "󰍛",
+    "on-click": "omarchy-launch-or-focus-tui btop",
+    "on-click-right": "alacritty"
+  },
+  "clock": {
+    "format": "󰥔 {:%H:%M}",
+    "format-alt": " {:%d-%m}",
+    "tooltip-format": "<span size='12pt' font_desc='JetBrainsMono Nerd Font'>{calendar}</span>",
+    "on-click-right": "omarchy-launch-webapp https://calendar.notion.so/",
+    "on-click-middle": "omarchy-launch-floating-terminal-with-presentation omarchy-tz-select"
+  },
+  "network": {
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "format": "{icon}",
+    "format-wifi": "{icon}",
+    "format-ethernet": "󰀂",
+    "format-disconnected": "󰤮",
+    "tooltip-format-wifi": "{essid} ({frequency} GHz)",
+    "tooltip-format-ethernet": "Connected",
+    "tooltip-format-disconnected": "Disconnected",
+    "interval": 3,
+    "spacing": 1,
+    "on-click": "omarchy-launch-wifi"
+  },
+  "battery": {
+    "format": "{capacity}% {icon}",
+    "format-discharging": "{icon}",
+    "format-charging": "{icon}",
+    "format-plugged": "",
+    "format-icons": {
+      "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+      "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+    "format-full": "󰂅",
+    "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
+    "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
+    "interval": 5,
+    "on-click": "omarchy-menu power",
+    "states": { "warning": 20, "critical": 10 }
+  },
+  "bluetooth": {
+    "format": "",
+    "format-off": "󰂲",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱",
+    "format-no-controller": "",
+    "tooltip-format": "Devices connected: {num_connections}",
+    "on-click": "omarchy-launch-bluetooth"
+  },
+  "pulseaudio": {
+    "format": "{icon}",
+    "on-click": "omarchy-launch-audio",
+    "on-click-right": "pamixer -t",
+    "tooltip-format": "Playing at {volume}%",
+    "scroll-step": 5,
+    "format-muted": "",
+    "format-icons": { "headphone": "", "headset": "", "default": ["", "", ""] }
+  },
+  "group/tray-expander": {
+    "orientation": "inherit",
+    "drawer": { "transition-duration": 300, "children-class": "tray-group-item" },
+    "modules": ["custom/expand-icon", "tray"]
+  },
+  "custom/expand-icon": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/screenrecording-indicator": {
+    "on-click": "omarchy-cmd-screenrecord",
+    "exec": "$OMARCHY_PATH/default/waybar/indicators/screen-recording.sh",
+    "signal": 8,
+    "return-type": "json"
+  },
+  "custom/idle-indicator": {
+    "on-click": "omarchy-toggle-idle",
+    "exec": "$OMARCHY_PATH/default/waybar/indicators/idle.sh",
+    "signal": 9,
+    "return-type": "json"
+  },
+  "custom/notification-silencing-indicator": {
+    "on-click": "omarchy-toggle-notification-silencing",
+    "exec": "$OMARCHY_PATH/default/waybar/indicators/notification-silencing.sh",
+    "signal": 10,
+    "return-type": "json"
+  },
+  "custom/voxtype": {
+    "exec": "omarchy-voxtype-status",
+    "return-type": "json",
+    "format": "{icon}",
+    "format-icons": { "idle": "", "recording": "󰍬", "transcribing": "󰔟" },
+    "tooltip": true,
+    "on-click-right": "omarchy-voxtype-config",
+    "on-click": "omarchy-voxtype-model"
+  },
+  "tray": {
+    "icon-size": 12,
+    "spacing": 10
+  }
+}
