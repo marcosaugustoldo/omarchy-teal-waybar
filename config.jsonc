@@ -5,11 +5,16 @@
   "spacing": 0,
   "height": 26,
   "modules-left": ["hyprland/workspaces"],
-  "modules-center": ["custom/pomodoro", "clock", "custom/minimized", "custom/pacman", "custom/flatpak", "custom/update", "custom/voxtype", "custom/screenrecording-indicator", "custom/idle-indicator", "custom/notification-silencing-indicator"],
-  "modules-right": ["mpris", "group/tray-expander", "custom/omarchy", "bluetooth", "network", "pulseaudio", "battery"],
+  "modules-center": ["mpris", "custom/voxtype", "custom/screenrecording-indicator", "custom/idle-indicator", "custom/notification-silencing-indicator"],
+  "modules-right": ["custom/update", "custom/flatpak", "custom/pacman", "group/tray-expander", "bluetooth", "network", "battery", "pulseaudio", "custom/omarchy", "custom/separator", "clock", "custom/pomodoro"],
+  "custom/separator": {
+    "format": "",
+    "interval": "once",
+    "tooltip": false
+  },
   "custom/pacman": {
     "format": "{}",
-    "interval": 86400,
+    "interval": 60,
     "return-type": "json",
     "exec": "~/.config/waybar/_scripts/updates/updates_arch.sh",
     "on-click": "omarchy-launch-floating-terminal-with-presentation 'yay -Syu'",
@@ -17,7 +22,7 @@
   },
   "custom/flatpak": {
     "format": "{}",
-    "interval": 86400,
+    "interval": 60,
     "return-type": "json",
     "exec": "~/.config/waybar/_scripts/updates/updates_flatpak.sh",
     "on-click": "omarchy-launch-floating-terminal-with-presentation 'flatpak update'",
@@ -26,25 +31,16 @@
   "custom/pomodoro": {
     "format": "{}",
     "return-type": "json",
-    "exec": "~/.config/hypr/_scripts/pomodoro/pomodoro_status.sh",
-    "on-click": "~/.config/hypr/_scripts/pomodoro/pomodoro_control.sh toggle",
-    "on-click-right": "~/.config/hypr/_scripts/pomodoro/pomodoro_control.sh reset",
+    "exec": "~/.config/waybar/_scripts/pomodoro/pomodoro_status.sh",
+    "on-click": "~/.config/waybar/_scripts/pomodoro/pomodoro_control.sh toggle",
+    "on-click-right": "~/.config/waybar/_scripts/pomodoro/pomodoro_control.sh reset",
     "signal": 13,
     "interval": "once"
   },
-  "custom/minimized": {
-    "format": "{}",
-    "return-type": "json",
-    "exec": "~/.config/hypr/_scripts/minimize/minimized_count.sh",
-    "on-click": "~/.config/hypr/_scripts/minimize/window_switcher.sh",
-    "signal": 11,
-    "interval": "once",
-    "escape": true
-  },
   "mpris": {
   "interval": 10,
-  "format": "{player_icon} {dynamic}",
-  "format-paused": "{status_icon} {artist} {title}",
+  "format": "{player_icon} {title}",
+  "format-paused": "{status_icon} {title}",
   "on-click-middle": "playerctl next",
   "on-click": "playerctl play-pause",
   "on-click-right": "playerctl previous",
@@ -55,10 +51,9 @@
   "player-icons": {
     "brave-browser": "",
     "default": "",
-    "mpv": "󰐹",
     "spotify": "󰎆",
     "vlc": "󰕼",
-    "tidal-hifi": "󰎅",
+    "tidal-hifi": "󰥠",
   },
   "status-icons": {
     "paused": "",
@@ -78,10 +73,12 @@
     "format": "{icon}",
     "all-outputs": false,
     "format-icons": {
-      "1": "",
+      "1": "",
       "2": "󰧑",
-      "3": "",
-      "4": ""
+      "3": "󱙺",
+      "4": "",
+      "5": "󰍥",
+      "6": ""
     },
     "on-scroll-up": "hyprctl dispatch workspace e+1",
     "on-scroll-down": "hyprctl dispatch workspace e-1",
@@ -89,7 +86,9 @@
       "1": [],
       "2": [],
       "3": [],
-      "4": []
+      "4": [],
+      "5": [],
+      "6": []
     }
   },
   "custom/omarchy": {
@@ -108,7 +107,7 @@
   },
   "cpu": {
     "interval": 5,
-    "format": "󰍛",
+    "format": "󰻲",
     "on-click": "omarchy-launch-or-focus-tui btop",
     "on-click-right": "alacritty"
   },
@@ -136,7 +135,7 @@
     "format": "{capacity}% {icon}",
     "format-discharging": "{icon}",
     "format-charging": "{icon}",
-    "format-plugged": "",
+    "format-plugged": "󰠠",
     "format-icons": {
       "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
       "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
@@ -149,11 +148,7 @@
     "states": { "warning": 20, "critical": 10 }
   },
   "bluetooth": {
-    "format": "",
-    "format-off": "󰂲",
-    "format-disabled": "󰂲",
-    "format-connected": "󰂱",
-    "format-no-controller": "",
+    "format": "",
     "tooltip-format": "Devices connected: {num_connections}",
     "on-click": "omarchy-launch-bluetooth"
   },
@@ -203,7 +198,7 @@
     "on-click": "omarchy-voxtype-model"
   },
   "tray": {
-    "icon-size": 12,
-    "spacing": 10
+    "icon-size": 13,
+    "spacing": 12
   }
 }

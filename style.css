@@ -7,12 +7,12 @@
   border-radius: 0;
   min-height: 0; /* Mantido para garantir que a barra não estique desnecessariamente */
   font-family: 'JetBrainsMono Nerd Font';
-  font-size: 12px;
+  font-size: 13px;
 }
 
 window#waybar {
   /* Fundo da barra principal com transparência sutil */
-  background-color: alpha(@background, 0);
+  background-color: alpha(@background, 0.75);
 }
 
 /* -----------------------------------------------------
@@ -21,13 +21,13 @@ window#waybar {
 tooltip {
   background-color: alpha(@background, 0.95);
   border: 1px solid @border;
-  border-radius: 12px; /* Reduzido de 16px para parear perfeitamente com os menus */
+  border-radius: 13px; /* Reduzido de 16px para parear perfeitamente com os menus */
   padding: 8px;
 }
 
 tooltip label {
   font-family: "JetBrainsMono Nerd Font";
-  font-size: 12px; /* Padronizado para px (era 10pt) */
+  font-size: 13px; /* Padronizado para px (era 10pt) */
   padding: 10px 5px 10px 5px;
   color: @foreground;
 }
@@ -36,16 +36,16 @@ menu {
   /* Menus de contexto (Tray/Clock) */
   background-color: alpha(@background, 0.95);
   border: 2px solid @border;
-  border-radius: 12px;
-  font-size: 12px;
+  border-radius: 13px;
+  font-size: 13px;
   padding: 10px 5px 10px 5px;
 }
 
 menu menuitem {
   background-color: transparent;
   padding: 10px 5px 10px 5px;
-  border-radius: 12px;
-  font-size: 12px;
+  border-radius: 13px;
+  font-size: 13px;
   transition: all 0.2s ease-in-out;
 }
 
@@ -53,7 +53,7 @@ menu menuitem:hover {
   /* Cor de sobretom monocromático nos menus */
   background-color: @accent;
   color: @foreground;
-  font-size: 12px;
+  font-size: 13px;
   padding: 10px 5px 10px 5px;
 }
 
@@ -66,10 +66,10 @@ menu menuitem:hover {
 
 .modules-center,
 .modules-right {
-  border-radius: 12px;
+  border-radius: 13px;
   padding: 2px 4px;
-  margin: 4px 4px; /* Corrigido de 3.5 sem px para 4px */
-  background: alpha(@background, 0.65);
+  margin: 1px; /* Corrigido de 3.5 sem px para 4px */
+  background: alpha(@background, 0);
 }
 
 .modules-center {
@@ -83,74 +83,52 @@ menu menuitem:hover {
 /* -----------------------------------------------------
  * Workspaces
  * ----------------------------------------------------- */
-#workspaces {
-  transition: all 150ms ease-in-out;
-  background: alpha(@background, 1);
-  border-radius: 12px;
-  padding: 1px;
-  margin: 2px 2px; /* Corrigido sintaxe inválida de margem */
-}
-
 #workspaces button {
-  transition: all 90ms ease-in;
-  padding: 1px 0;
-  background: alpha(@background, 1);
-  color: white;
-  border: 1px solid transparent;
-  border-radius: 10px;
-  margin: 1px; /* Corrigido de 1 1px */
+  all: initial;
+  transition: all 90ms ease-in-out;  
+  padding: 0 6px;
+  margin-left:  4px;
+  margin-right: 4px;
+  min-width: 2px;
 }
 
-/* Agrupando estados ativos idênticos */
-#workspaces button.active,
-#workspaces button.empty.active {
-  border: 1px solid alpha(@highlight, 0.1);
-  background: alpha(@highlight, 0.4);
-  color: #121212;
-  transition: all 90ms ease-in-out;
-  min-width: 35px;
-  padding: 0;
+#workspaces button.active {
+  border-top: 1px solid @foreground;
+  border-color: @highlight;
+  margin-bottom: 2px;
+}
+
+#workspaces button.empty {
+  opacity: 1;
 }
 
 /* -----------------------------------------------------
  * Módulos Individuais (Agrupados por espaçamento)
  * ----------------------------------------------------- */
-#cpu,
+#custom-pacman,
+#custom-flatpak,
+#custom-update,
 #bluetooth,
 #network,
-#pulseaudio,
 #battery,
-#custom-omarchy {
-  min-width: 12px;
-  margin: 0 4px;
-  font-size: 12px;
-}
-
-#clock,
-#custom-minimized,
-#custom-pomodoro,
-#custom-pacman,
+#pulseaudio,
 #custom-omarchy,
-#custom-flatpak,
-#custom-update {
-  margin: 0 7.5px 0 7.5px;
-  font-size: 12px;
+#custom-separator,
+#custom-pomodoro,
+#clock {
+  min-width: 13px;
+  margin: 0 5px 0 5px;
+  font-size: 13px;
 }
 
 #tray {
-  margin-right: 4px;
-  margin-left: 4px;
-  font-size: 12px;
+  margin-right: 5px;
+  margin-left: 5px;
+  font-size: 13px;
 }
 
 #custom-expand-icon {
   margin: 0 8px 0 8px;
-}
-
-#custom-update {
-  min-width: 12px;
-  margin: 0 8px;
-  font-size: 10px;
 }
 
 /* -----------------------------------------------------
@@ -163,7 +141,7 @@ menu menuitem:hover {
 #custom-screenrecording-indicator,
 #custom-idle-indicator,
 #custom-notification-silencing-indicator {
-  min-width: 12px;
+  min-width: 13px;
   margin: 0 0 0 5px;
   font-size: 10px;
   padding-bottom: 1px;
@@ -178,7 +156,7 @@ menu menuitem:hover {
 }
 
 #custom-voxtype {
-  min-width: 12px;
+  min-width: 13px;
   margin: 0 0 0 7px; /* Convertido de 7.5px para inteiro */
 }
 
@@ -203,11 +181,11 @@ menu menuitem:hover {
  * MPRIS
  * ----------------------------------------------------- */
 #mpris.paused {
-  margin: 0 8px;
+  margin: 0 4px;
   color: @foreground;
 }
 
 #mpris.playing {
-  margin: 0 8px;
-  color: alpha(@highlight, 0.75);
+  margin: 0 4px;
+  color: alpha(@accent, 1);
 }
